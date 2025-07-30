@@ -1,73 +1,142 @@
-# Welcome to your Lovable project
+# Premier Loom
 
-## Project info
+A modern starter template built with **React 19**, **Next.js 15 (App Router)**, **Tailwind CSS**, and **shadcn/ui**. It ships with an opinionated set-up for rapidly building production-ready SaaS dashboards, marketing sites, or internal tools.
 
-**URL**: https://lovable.dev/projects/4c754c7d-4c35-468f-bae2-bf067dbb9d2b
+---
 
-## How can I edit this code?
+## 📋 Table of Contents
 
-There are several ways of editing your application.
+1. [Features](#-features)
+2. [Prerequisites](#-prerequisites)
+3. [Getting Started](#-getting-started)
+4. [Available Scripts](#-available-scripts)
+5. [Project Structure](#-project-structure)
+6. [Git Workflow](#-git-workflow)
+7. [Contributing](#-contributing)
+8. [License](#-license)
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4c754c7d-4c35-468f-bae2-bf067dbb9d2b) and start prompting.
+## ✨ Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Next.js 15 / React 19** with the App Router and Server Components
+- **shadcn/ui + Radix UI** accessible component library
+- **Tailwind CSS v3** with dark-mode and design-token customisation
+- **TypeScript** across the stack
+- **Framer Motion** for smooth animations
+- **ESLint & Prettier** for consistent style
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+| Tool | Version (recommended) |
+|------|-----------------------|
+| Node | ≥ 18.18 |
+| npm / pnpm / yarn | Latest |
 
-Follow these steps:
+> Tip — use [Volta](https://volta.sh/) or [nvm-windows](https://github.com/coreybutler/nvm-windows) to easily manage Node versions.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🚀 Getting Started
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/<your-org>/premier-loom.git
+   cd premier-loom
+   ```
+2. **Install dependencies**
+   ```bash
+   # pick one package manager
+   npm install          # or: pnpm install | yarn install
+   ```
+3. **Run the dev server**
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:3000` to view the site. HMR reloads the page when files change.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### Environment Variables
+
+If your project requires API keys or secrets, copy `.env.example` to `.env.local` and add the values.
+
+---
+
+## 🏗️ Available Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `npm run dev` | Start development server with HMR |
+| `npm run build` | Create an optimised production build |
+| `npm start` | Start Next.js in production mode |
+| `npm run lint` | Run ESLint static analysis |
+
+---
+
+## 📂 Project Structure
+
+```
+├── app/                 # Route segments (App Router)
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── hooks/           # Custom React hooks
+│   ├── lib/             # Helper utilities / API clients
+│   └── styles/          # Global & layer styles
+├── public/              # Static assets served at root
+├── tailwind.config.ts   # Tailwind theme configuration
+└── next.config.ts       # Next.js configuration
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🌳 Git Workflow
 
-**Use GitHub Codespaces**
+### Clone Your Fork (first time only)
+```bash
+git clone https://github.com/<your-username>/premier-loom.git
+cd premier-loom
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Create a Branch for a Feature/Fix
+```bash
+git checkout -b feat/awesome-feature   # or fix/important-bug
+```
 
-## What technologies are used for this project?
+### Commit Your Work
+```bash
+git add .
+git commit -m "feat: awesome feature"
+```
 
-This project is built with:
+### Pull Latest Changes From `main`
+```bash
+git pull origin main --rebase   # keep your branch up-to-date
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Push to GitHub
+```bash
+git push origin feat/awesome-feature
+```
 
-## How can I deploy this project?
+### Open a Pull Request
+Go to your fork on GitHub and click **Compare & pull request**.
 
-Simply open [Lovable](https://lovable.dev/projects/4c754c7d-4c35-468f-bae2-bf067dbb9d2b) and click on Share -> Publish.
+> Remember to run `npm run lint` before pushing to keep the codebase clean.
 
-## Can I connect a custom domain to my Lovable project?
+---
 
-Yes, you can!
+## 🤝 Contributing
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+All contributions are welcome! Please open an issue to discuss any large changes before submitting a PR.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+1. Fork the repo & create your branch.
+2. Make changes & write tests if relevant.
+3. Ensure `npm run lint` passes.
+4. Open a descriptive PR.
+
+---
+
+## 📄 License
+
+MIT © 2025 Your Company

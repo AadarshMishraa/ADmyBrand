@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { circOut, easeOut } from 'framer-motion';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Check, Sparkles, Crown, Building, ArrowRight, Calculator, XCircle, Plus, Minus } from 'lucide-react';
 
@@ -8,7 +9,7 @@ import { Check, Sparkles, Crown, Building, ArrowRight, Calculator, XCircle, Plus
 // And configure TailwindCSS to use "Sora" as a font family.
 
 // --- Mock UI Components ---
-const Button = ({ variant = 'primary', size = 'lg', className, children, ...props }) => {
+const Button = ({ variant = 'primary', size = 'lg', className = '', children, ...props }) => {
     const baseClasses = "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-semibold ring-offset-background transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
     const variantClasses = { primary: "btn btn-primary", ghost: "btn btn-ghost" };
     const sizeClasses = { lg: "h-12 px-8 text-base" };
@@ -81,7 +82,7 @@ const PricingCard = ({ plan, isAnnual, onROIClick }) => {
     };
     const itemVariants = {
         hidden: { opacity: 0, y: 15 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'circOut' } }
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } }
     };
 
     return (
@@ -206,7 +207,7 @@ const Pricing = () => {
   ];
 
   const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } } };
-  const itemVariants = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "circOut" } } };
+  const itemVariants = { hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: circOut } } };
 
   return (
     <section id="pricing" className="py-24 sm:py-32 bg-background dark:bg-gradient-hero">
@@ -260,7 +261,7 @@ const Pricing = () => {
                             </ul>
                         </div>
                         <div className="flex-shrink-0 mt-4 md:mt-0">
-                             <Button variant="primary">Contact Sales</Button>
+                             <Button variant="primary" className="">Contact Sales</Button>
                         </div>
                     </div>
                 </div>

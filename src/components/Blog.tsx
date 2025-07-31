@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, easeOut, Variants } from 'framer-motion';
 import { ArrowRight, Calendar, Clock, User, Star } from 'lucide-react';
 
 // MOCK: In a real app, this would come from your UI library (e.g., shadcn/ui)
@@ -70,17 +70,17 @@ const BlogPage = () => {
   ];
 
   // --- Animation Variants ---
-  const sectionVariants = {
+    const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: easeOut } }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" }
+      transition: { delay: i * 0.1, duration: 0.5, ease: easeOut }
     })
   };
 

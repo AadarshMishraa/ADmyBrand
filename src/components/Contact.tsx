@@ -1,6 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, circOut, Variants } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle, Loader2, HelpCircle, Copy, ArrowRight } from 'lucide-react';
+
+// ---- Type Definitions ----
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  message: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  company?: string;
+  message?: string;
+}
 
 // --- Mock UI Components (for standalone functionality) ---
 const Input = ({ className, ...props }) => (
@@ -69,13 +84,13 @@ const FloatingLabelTextarea = ({ id, label, error, ...props }) => (
 
 // --- Main Contact Component ---
 const ContactPage = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
-  const [formErrors, setFormErrors] = useState({});
+  const [formData, setFormData] = useState<FormData>({ name: '', email: '', company: '', message: '' });
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copiedItem, setCopiedItem] = useState('');
 
-  const successMessageRef = useRef(null);
+  const successMessageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (isSubmitted && successMessageRef.current) {
@@ -83,8 +98,8 @@ const ContactPage = () => {
     }
   }, [isSubmitted]);
 
-  const validateForm = () => {
-    const errors = {};
+  const validateForm = (): FormErrors => {
+    const errors: FormErrors = {};
     if (!formData.name) errors.name = "Name is required.";
     if (!formData.email) {
       errors.email = "Email is required.";
@@ -95,7 +110,7 @@ const ContactPage = () => {
     return errors;
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     if (value) {
@@ -105,7 +120,7 @@ const ContactPage = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors = validateForm();
     setFormErrors(errors);
@@ -137,14 +152,14 @@ const ContactPage = () => {
     { icon: MapPin, title: 'Office', details: '123 Creative St, Tech City', description: 'Come say hello' }
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "circOut" } }
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: circOut } }
   };
 
   return (
@@ -157,7 +172,7 @@ const ContactPage = () => {
           <motion.div 
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "circOut" }}
+            transition={{ duration: 0.8, ease: circOut }}
             className="flex flex-col justify-center space-y-12"
           >
             {/* Page Header */}
@@ -212,7 +227,7 @@ const ContactPage = () => {
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "circOut", delay: 0.2 }}
+            transition={{ duration: 0.8, ease: circOut, delay: 0.2 }}
           >
             <div className="bg-surface dark:bg-gradient-surface rounded-2xl p-8 sm:p-12 border border-border-default shadow-2xl h-full">
               <AnimatePresence mode="wait">
@@ -263,7 +278,7 @@ const ContactPage = () => {
                         </motion.div>
                       </div>
                       <motion.div variants={itemVariants}>
-                        <FloatingLabelInput id="company" name="company" type="text" label="Company" value={formData.company} onChange={handleInputChange} />
+                        <FloatingLabelInput id="company" name="company" type="text" label="Company" value={formData.company} onChange={handleInputChange} error={formErrors.company} />
                       </motion.div>
                       <motion.div variants={itemVariants}>
                         <FloatingLabelTextarea id="message" name="message" label={<>Message <span className="text-primary">*</span></>} value={formData.message} onChange={handleInputChange} rows={6} error={formErrors.message} />

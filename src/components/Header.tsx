@@ -7,7 +7,7 @@ import { Menu, X, ChevronDown, Search, Sun, Moon } from 'lucide-react';
 // This component assumes the Aether theme's CSS variables and button classes are available.
 
 // --- Mock UI Components ---
-const Button = ({ variant = 'primary', size = 'sm', className, children, ...props }) => {
+const Button = ({ variant = 'primary', size = 'sm', className = '', children, ...props }) => {
     const baseClasses = "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-semibold ring-offset-background transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
     const variantClasses = { primary: "btn btn-primary", ghost: "btn btn-ghost" };
     const sizeClasses = { sm: "h-9 px-4", icon: "h-9 w-9" };
@@ -205,18 +205,16 @@ const Header = () => {
 
   useEffect(() => {
     // 16. Throttle Scroll Listener
-    const throttle = (func, limit) => {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
+    const throttle = (func: (...args: any[]) => void, limit: number) => {
+        let inThrottle: boolean;
+        return (...args: Parameters<typeof func>) => {
             if (!inThrottle) {
-                func.apply(context, args);
+                func(...args);
                 inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
+                setTimeout(() => (inThrottle = false), limit);
             }
-        }
-    }
+        };
+    };
 
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);

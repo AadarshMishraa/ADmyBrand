@@ -135,7 +135,7 @@ const FAQ = () => {
         }
       }
     }
-  }, []);
+  }, [faqsData]);
 
   const toggleFaq = (index) => {
     const newIndex = openIndex === index ? null : index;
@@ -156,7 +156,7 @@ const FAQ = () => {
     const prompt = `Based on the following FAQ context, answer the user's question about the SaaS product. Keep the answer helpful and concise.\n\nContext:\n${context}\n\nUser Question: ${aiQuestion}\n\nAnswer:`;
 
     try {
-        let chatHistory = [];
+        const chatHistory: { role: string; parts: { text: string }[] }[] = [];
         chatHistory.push({ role: "user", parts: [{ text: prompt }] });
         const payload = { contents: chatHistory };
         const apiKey = ""; 

@@ -1,23 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useAnimation, useMotionValue, useSpring, useTransform, animate } from 'framer-motion';
+import { motion, AnimatePresence, useAnimation, useMotionValue, useSpring, useTransform, animate, cubicBezier } from 'framer-motion';
 import { ArrowRight, Play, Star, Users, TrendingUp, Shield, X, BarChart2, Sparkles, Zap } from 'lucide-react';
 
 // Throttle utility for performance
 const throttle = (func, limit) => {
   let inThrottle;
-  return function() {
-    const args = arguments;
-    const context = this;
+  return (...args) => {
     if (!inThrottle) {
-      func.apply(context, args);
+      func(...args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      setTimeout(() => (inThrottle = false), limit);
     }
   };
 };
 
+// Types
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'ghost';
+  size?: 'lg' | 'xl';
+}
+
 // Enhanced Button Component using design system
-const Button = ({ variant = 'primary', size = 'lg', className, children, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ variant = 'primary', size = 'lg', className = '', children, ...props }) => {
   const baseClasses = "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-semibold transition-all duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group";
   
   const variantClasses = {
@@ -316,7 +320,7 @@ const Hero = () => {
       rotateX: 0, 
       transition: { 
         duration: 0.8, 
-        ease: [0.25, 0.46, 0.45, 0.94] 
+        ease: cubicBezier(0.25, 0.46, 0.45, 0.94) 
       } 
     } 
   };
